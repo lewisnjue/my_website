@@ -11,7 +11,7 @@ class Post(models.Model):
 
 class Profile(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE)
-    image=models.ImageField(default='default.png',upload_to='images')
+    image=models.ImageField( default='default.png', upload_to='images')
 
 
     
