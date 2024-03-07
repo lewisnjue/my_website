@@ -10,3 +10,10 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
         print('User profile created!')  # Improved message
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance,**kwargs):
+        instance.profile.save()
+        print('User profile created!')  # Improved message
+      

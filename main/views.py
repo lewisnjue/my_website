@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import Register,PostForm
+from .forms import Register,PostForm,User_updateForm,Profile_updateForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import logout as user_logout, authenticate, login
@@ -64,7 +64,16 @@ def delete_post(request, post_id):
 
 @login_required
 def profile(request):
-    profile = Profile.objects.get(user=request.user)
-    return render(request, 'main/profile.html',{
-        'profile': profile
-    })
+    if request.method == 'POST':
+        p_form = Profile_updateForm(request.POST, request.FILES, instance=request.user.profile)
+        u_form=User_updateForm(request.POST,instance=request.user)
+        if p_form.is_valid() and u_form.is_valid(): 
+            p_form.save()
+            u_form.save()
+            return HttpResponseRedirect(reverse('profile'))
+    else:
+        p_form=Profile_updateForm(instance=request.user.profile)
+        u_form=User_updateForm(instance=request.user)
+        context = {'p_form': p_form, 'u_form': u_form}
+    
+    return render(request, 'main/profile.html', context)

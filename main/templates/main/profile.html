@@ -1,4 +1,5 @@
 {% extends 'main/layout.html' %}
+{% load crispy_forms_tags %}
 {% block title %}
 Profile
 {% endblock %}
@@ -8,10 +9,20 @@ Profile
   <div class="row justify-content-center">
     <div class="col-md-6 col-sm-8">
       <div class="card shadow-sm">
-        <img src="{{ profile.image.url }}" alt="{{ user.username }} profile picture" class="card-img-top rounded-circle mx-auto d-block" style="width: 150px; height: 150px; object-fit: cover;">
+        <img src="{{ user.profile.image.url }}" alt="{{ user.username }} profile picture" class="card-img-top rounded-circle mx-auto d-block" style="width: 150px; height: 150px; object-fit: cover;">
         <div class="card-body text-center">
           <h5 class="card-title">{{ user.username }}</h5>
-          </div>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+              {{ u_form|crispy }}
+            </div>
+            <div class="mb-3">
+              {{ p_form|crispy }}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

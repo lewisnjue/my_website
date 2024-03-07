@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User 
 from django.contrib.auth.forms import UserCreationForm 
 from .models import Post
+from .models import Profile
 
 class Register(UserCreationForm):
     email = forms.EmailField()
@@ -20,7 +21,15 @@ class PostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PostForm, self).__init__(*args, **kwargs)
         # Add any custom form fields, widgets, or validation logic here
-
+class User_updateForm(forms.ModelForm):
+    email = forms.EmailField()
+    class Meta:
+        model = User
+        fields = ('username','email')
+class Profile_updateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']
     
     
     
