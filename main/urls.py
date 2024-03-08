@@ -14,5 +14,5 @@ urlpatterns =[
     path('profile',views.profile,name='profile'),
     
 ]
-if settings.DEBUG:
+if settings.DEBUG:# when im in development do the follwing and that is what this means
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

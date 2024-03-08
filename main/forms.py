@@ -16,7 +16,7 @@ class Register(UserCreationForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post  # Specify the model to associate the form with
-        fields = ['title', 'description']
+        fields = ['title', 'description','image']
 
     def __init__(self, *args, **kwargs):
         super(PostForm, self).__init__(*args, **kwargs)

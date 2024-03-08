@@ -38,7 +38,7 @@ def logout(request):
 @login_required
 def post(request):
     if request.method == 'POST':
-        form = PostForm(request.POST)  # Use appropriate form name
+        form = PostForm(request.POST,request.FILES)  # Use appropriate form name
         if form.is_valid():
             post = form.save(commit=False)  # Prevent immediate saving
             post.user = request.user  # Associate post with logged-in user
